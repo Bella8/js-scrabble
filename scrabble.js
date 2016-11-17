@@ -16,65 +16,65 @@ Scrabble.prototype.score = function(word) {
   return score;
 };
 
-
-
 Scrabble.prototype.highestScoreFrom = function(arrayOfWords)
 {
   this.arrayOfWords = arrayOfWords;
   var scoredWords = [];
   var highestScore = 0;
 
- for (var i = 0; i < arrayOfWords.length; i++) {
-       var word = arrayOfWords[i];
+  for (var i = 0; i < arrayOfWords.length; i++) {
+    var word = arrayOfWords[i];
     var scoredInt = this.score(word);
-
-    if(highestScore < scoredInt){
+     if (highestScore <= scoredInt){
       highestScore = scoredInt;
-      scoredWords.push(word);
+     }
+  }
+  for (var i = 0; i < arrayOfWords.length; i++) {
+    var word = arrayOfWords[i];
+    var scoredInt = this.score(word);
+  if(scoredInt == highestScore){
+   scoredWords.push(word);
+ }
+ }
 
-    // console.log(highestScore);
-    }
-
-    // console.log(highestScore);
-  //   if(scoredWords.scoredInt === undefined)
-  // {
-  //   scoredWords.scoredInt = [word];
-  //   console.log(scoredWords);
-  //   }
-  //   else
-  //   {
-  //     scoredWords.scoredInt.push(word);
-  //
-  //   }
-  // }
-  // scoredWords.push(word);
-  // console.log(highestScore);
-  // if(scoredWords.length > 1)
-  // {
-  //   scoredWords.sort(function(a, b ) {
-  //     return b.length - a.length;
-  //   });
-  // }
-}
-  // return scoredWords.highestScore[0];
-   return(scoredWords[scoredWords.length - 1]);
+  if(scoredWords.length > 1)
+  {
+    scoredWords.sort(function(a, b ) {
+       return b.length - a.length;
+    });
+    if ((scoredWords[0].length)==7) {
+      return scoredWords[0];
+    } else{
+     return(scoredWords[scoredWords.length - 1]);
+  }
+  }
+  else{
+  return scoredWords[0];
+  }
 };
 
-//new scrabble object
-var scrabble = new Scrabble();
-console.log(scrabble.highestScoreFrom(["iiiiiii","aaa", "asefr", "aer", "aserd", "aaaaaaa"]));
-console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "iiiiiii"]));
-console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "zzzzzz"]));
-//
-// //testing
-// console.log(scrabble.score("abc"));
+  //new scrabble object
+  var scrabble = new Scrabble();
+  console.log(scrabble.highestScoreFrom(["iiiiiii","aaa", "asefr", "aer", "aserd", "aaaaaaa", "iiiiiid"]));
+  console.log(scrabble.highestScoreFrom(["dd","iiii"]));
+  console.log(scrabble.highestScoreFrom(["iiii","dd"]));
+
+  console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "iiiiiii", "aaaaaaa"]));
+  console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd","aaaaaaa", "iiiiiii"]));
+  console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "zzzzz"]));
+  //
+  // //testing
+  console.log(scrabble.score("iiiiiid"));
+  console.log(scrabble.score("iiiiiii"));
+  console.log(scrabble.score("aaaaaaa"));
+    console.log(scrabble.score("zzzzz"));
 
 
-// YOUR CODE HERE
-// Scrabble.prototype.helloWorld = function() {
-//   return 'hello world!';
-// };
-// module.exports = Scrabble;
-//
-// scrabb = new Scrabble;
-// console.log(scrabb.helloWorld());
+  // YOUR CODE HERE
+  // Scrabble.prototype.helloWorld = function() {
+  //   return 'hello world!';
+  // };
+  // module.exports = Scrabble;
+  //
+  // scrabb = new Scrabble;
+  // console.log(scrabb.helloWorld());
