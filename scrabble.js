@@ -1,12 +1,12 @@
 var Scrabble = function() {};
 //global variable letterscore
-letterScore = {"A":1, "B":3, "C":3, "D":2, "E":1, "F":4, "G":2, "H":4, "I":1, "J":8, "K":5, "L":1, "M":3, "N":1, "O":1, "P":3, "Q":10, "R":1, "S":1, "T":1, "U":1, "V":4, "W":4, "X":8, "Y":4, "Z":10};
+letterScore = {"A": 1, "B": 3, "C": 3, "D": 2, "E": 1, "F": 4, "G": 2, "H": 4, "I": 1, "J": 8, "K": 5, "L": 1, "M": 3, "N": 1, "O": 1, "P": 3, "Q": 10, "R": 1, "S": 1, "T": 1, "U": 1, "V": 4, "W": 4, "X": 8, "Y": 4, "Z": 10};
 
 //function score that is prototype of Scrabble
 Scrabble.prototype.score = function(word) {
   word = word.toUpperCase();
   this.word = word.split("");
-   var score = 0;
+  var score = 0;
   if (this.word.length == 7) {
     score = 50;
   }
@@ -16,11 +16,58 @@ Scrabble.prototype.score = function(word) {
   return score;
 };
 
+
+
+Scrabble.prototype.highestScoreFrom = function(arrayOfWords)
+{
+  this.arrayOfWords = arrayOfWords;
+  var scoredWords = [];
+  var highestScore = 0;
+
+ for (var i = 0; i < arrayOfWords.length; i++) {
+       var word = arrayOfWords[i];
+    var scoredInt = this.score(word);
+
+    if(highestScore < scoredInt){
+      highestScore = scoredInt;
+      scoredWords.push(word);
+
+    // console.log(highestScore);
+    }
+
+    // console.log(highestScore);
+  //   if(scoredWords.scoredInt === undefined)
+  // {
+  //   scoredWords.scoredInt = [word];
+  //   console.log(scoredWords);
+  //   }
+  //   else
+  //   {
+  //     scoredWords.scoredInt.push(word);
+  //
+  //   }
+  // }
+  // scoredWords.push(word);
+  // console.log(highestScore);
+  // if(scoredWords.length > 1)
+  // {
+  //   scoredWords.sort(function(a, b ) {
+  //     return b.length - a.length;
+  //   });
+  // }
+}
+  // return scoredWords.highestScore[0];
+   return(scoredWords[scoredWords.length - 1]);
+};
+
 //new scrabble object
 var scrabble = new Scrabble();
-
-//testing
-console.log(scrabble.score("abc"));
+console.log(scrabble.highestScoreFrom(["iiiiiii","aaa", "asefr", "aer", "aserd", "aaaaaaa"]));
+console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "iiiiiii"]));
+console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "zzzzzz"]));
+//
+// //testing
+// console.log(scrabble.score("abc"));
 
 
 // YOUR CODE HERE
