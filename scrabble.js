@@ -1,10 +1,9 @@
 var Scrabble = function() {};
-//global variable letterscore
-letterScore = {"A": 1, "B": 3, "C": 3, "D": 2, "E": 1, "F": 4, "G": 2, "H": 4, "I": 1, "J": 8, "K": 5, "L": 1, "M": 3, "N": 1, "O": 1, "P": 3, "Q": 10, "R": 1, "S": 1, "T": 1, "U": 1, "V": 4, "W": 4, "X": 8, "Y": 4, "Z": 10};
-
-//function score that is prototype of Scrabble
 Scrabble.prototype.score = function(word) {
-  word = word.toLowerCase();
+  var letterScore = {"A": 1, "B": 3, "C": 3, "D": 2, "E": 1, "F": 4, "G": 2, "H": 4, "I": 1, "J": 8, "K": 5, "L": 1, "M": 3, "N": 1, "O": 1, "P": 3, "Q": 10, "R": 1, "S": 1, "T": 1, "U": 1, "V": 4, "W": 4, "X": 8, "Y": 4, "Z": 10};
+
+  word = word.toUpperCase();
+
   this.word = word.split("");
   var score = 0;
   if (this.word.length == 7) {
@@ -57,8 +56,9 @@ Scrabble.prototype.highestScoreFrom = function(arrayOfWords)
 var Player = function(name){
   this.name = name;
   this.plays =[];
-  scrabble = new Scrabble;
+  this.scrabble = new Scrabble();
 };
+
 Player.prototype.play = function(word) {
   if (this.hasWon()===false){
     this.plays.push(word);
@@ -66,20 +66,15 @@ Player.prototype.play = function(word) {
   else {
     return false;
   }
-  // console.log(this.plays)
 };
-// console.log(Player.play)
 
 Player.prototype.totalScore = function() {
   var totalScore = 0;
   for(var i = 0; i < this.plays.length; i++){
-    totalScore +=scrabble.score(this.plays[i]);
-    // console.log(scrabble.score(this.plays[i]));
-    // console.log(this.plays);
-    // console.log(totalScore);
+    totalScore += this.scrabble.score(this.plays[i]);
+    console.log(this.scrabble.score(this.plays[i]));
   }
   return totalScore;
-  // console.log(totalScore);
 };
 
 Player.prototype.hasWon = function(){
@@ -88,30 +83,29 @@ Player.prototype.hasWon = function(){
   }
   else {
     return false;
-
   }
 };
 
 Player.prototype.highestScoringWord = function(){
-  var highstWordScored = scrabble.highestScoreFrom(this.plays);
+  var highstWordScored = this.scrabble.highestScoreFrom(this.plays);
   return highstWordScored;
 };
 
 Player.prototype.highestWordScore = function(){
-  var highstScore = scrabble.score(this.highestScoringWord);
+  var highstScore = this.scrabble.score(this.highestScoringWord());
   return highstScore;
-  // console.log(highstScore);
 };
 
-
-var player = new Player("Beylul");
-console.log(player.plays);
-console.log(player.play("word"));
-console.log(player.plays);
+//testing player
+// var player = new Player("Beylul");
+// console.log(player.plays);
+// console.log(player.play("word"));
+// console.log(player.plays);
 // console.log(player.totalScore());
 // console.log(player.plays);
 // console.log(player.hasWon());
 // console.log(player.play("zzzzzzz"));
+// console.log(player.plays);
 // console.log(player.play("zzzzzzz"));
 // console.log(player.totalScore());
 // console.log(player.hasWon());
@@ -130,8 +124,8 @@ console.log(player.plays);
 // console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "iiiiiii", "aaaaaaa"]));
 // console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd","aaaaaaa", "iiiiiii"]));
 // console.log(scrabble.highestScoreFrom(["aaa", "asefr", "aer", "aserd", "aaaaaaa", "zzzzz"]));
-//
-// //testing score
+// //
+// // //testing score
 // console.log(scrabble.score("iiiiiid"));
 // console.log(scrabble.score("iiiiiii"));
 // console.log(scrabble.score("aaaaaaa"));
